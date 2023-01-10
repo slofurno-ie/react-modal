@@ -133,7 +133,7 @@ export default class ModalPortal extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.isOpen) {
+    if (this.isOpen) {
       this.afterClose();
     }
     clearTimeout(this.closeTimer);
@@ -175,6 +175,8 @@ export default class ModalPortal extends Component {
       ariaHiddenInstances += 1;
       ariaAppHider.hide(appElement);
     }
+
+    this.isOpen = true
 
     portalOpenInstances.register(this);
   }
@@ -222,6 +224,8 @@ export default class ModalPortal extends Component {
     if (this.props.onAfterClose) {
       this.props.onAfterClose();
     }
+
+    this.isOpen = false
 
     portalOpenInstances.deregister(this);
   };
